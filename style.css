@@ -1,0 +1,84 @@
+.form-card{
+    width: 700px;
+    height: 900px;
+    border: 0.1px solid  rgba(227, 151, 201, 0.2);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    /* filter: brightness(90%); */
+}
+
+.container{
+    padding: 5px;
+    padding-top: 15px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    height: 1000px;
+}
+
+body{
+    background-image: url(pexels-jv-buenconcejo-2719301.jpg);
+    background-size: cover;
+    background-position: center; 
+}
+
+.input, textarea, input{
+    backdrop-filter: blur(1px)!important;
+    background-color: rgba(201, 201, 201, 0.2)!important;
+    filter: brightness(100%);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2)!important;
+}
+
+.input::placeholder, textarea::placeholder, input::placeholder{
+    color: rgb(226, 226, 226)!important;
+    text-shadow: none;
+}
+
+.input:focus, textarea:focus, input:focus{
+    background-color: rgba(201, 201, 201, 0.1)!important;
+    border-color: none!important;
+    outline: none!important;
+    border: none!important;
+}
+
+.title p{
+    font-size: 20px;
+    font-weight: 600;
+    text-shadow: 2px 2px 4px rgba(0, 1, 4, 0.3);
+    letter-spacing: 2px;
+}
+
+.btn-2{
+    outline: 2px solid #ffffff;
+}
+
+.btn-2:hover{
+    color: black !important;
+    font-weight: 500;
+    outline: none;
+    background-color: rgb(235, 183, 218) !important;
+}
+
+.btn-1 {
+    background-color: rgb(181, 17, 181) !important;
+}
+
+.btn-1:hover {
+    background-color: rgb(163, 7, 163) !important;
+}
+
+label{
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.form-select option{
+    color: black!important;
+    background-color: rgb(227, 173, 227)!important;
+    /* backdrop-filter: blur(1px)!important;
+    background-color: rgba(201, 201, 201, 0.2)!important; */
+}
+
+.form-select option:hover{
+    color: black!important;
+    background-color: rgb(135, 9, 135)!important;
+}

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Kegiatan</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <form action="https://script.google.com/macros/s/AKfycbyzINXnEfwvGeo7vtloVbtoPJoNmGatUh9B4BZO2nBkauoE_9n2V5f6cGjRmt_1uDV5zA/exec" method="post" enctype="multipart/form-data">
+            <div class="form-card shadow-lg p-5">
+                <div class="title text-light justify-content-center d-flex">
+                    <p>LAPORAN REALISASI TARGET KINERJA</p>
+                </div>
+                <div class="input-1 mb-2">
+                    <label for="" class="col-form-label text-light">Nama Kegiatan</label>
+                    <input id="nama" name="nama" class="form-control text-light input rounded-pill bg-tranparent" type="text" placeholder="Masukkan Nama Kegiatan" aria-label="default input example">
+                </div>
+                <div class="row mb-2">
+                    <div class="col">
+                        <div class="input-2">
+                            <label for="" class="col-form-label text-light">Jenis Kegiatan</label>
+                            <!-- <input class="form-control text-light input rounded-pill bg-tranparent" type="text" placeholder="Masukkan Jenis Kegiatan" aria-label="default input example"> -->
+                            <select id="jenis" name="jenis" class="form-select text-light input rounded-pill bg-tranparent" aria-label="Default select example">
+                                <option selected>Pilih Jenis Kegiatan</option>
+                                <option value="kbm">KBM</option>
+                                <option value="nonkbm">Non-KBM</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-3">
+                            <label for="" class="col-form-label text-light">Tanggal Kegiatan</label>
+                            <input id="tgl_kgt" name="tgl_kgt" class="form-control text-light input rounded-pill bg-tranparent" type="date" placeholder="Default input" aria-label="default input example">
+                        </div>
+                    </div>
+                </div>
+                <div class="input-4 mb-2">
+                    <label for="" class="col-form-label text-light">Uraian Kegiatan</label>
+                    <textarea id="uraian" name="uraian" class="form-control text-light" placeholder="Masukkan Uraian Kegiatan" id="floatingTextarea2" style="height: 200px"></textarea>
+                </div>
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="input-1 mb-2">
+                            <label for="" class="col-form-label text-light">Target Kegiatan</label>
+                            <!-- <input id="target" name="target" class="form-control text-light input rounded-pill bg-tranparent" type="text" placeholder="Masukkan Target Kegiatan" aria-label="default input example"> -->
+                            <textarea id="target" name="target" class="form-control text-light" placeholder="Masukkan Target Kegiatan" id="floatingTextarea2" style="height: 150px"></textarea>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-1 mb-2">
+                            <label for="" class="col-form-label text-light">Bukti Kegiatan</label>
+                            <input accept="image/*" type="file" class="form-control rounded-pill text-light" name="buktis" id="buktis">
+                        </div>
+                    </div>
+                </div>
+                <div class="d-grid gap-3">
+                    <button class="btn btn-1 rounded-pill text-light" type="submit">Submit</button>
+                    <button class="btn btn-2 rounded-pill text-light" type="button">Cancel</button>
+                    <input type="hidden" id="buktisEnc" name="buktisEnc">
+                </div>
+            </div>
+        </form>
+    </div>
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        // This line declares a variable called "url" and assigns it a value of "Api_Endpoint_Url"
+        let url = "Api_Endpoint_Url";
+        // This line declares a variable called "file" and assigns it the value of the first input element on the page
+        let file = document.querySelector("input");
+        // This line declares a variable called "img" and assigns it the value of the first image element on the page
+        let img = document.querySelector("img");
+        // This line adds an event listener to the "change" event of the "file" input element
+        file.addEventListener('change',()=>{
+            // This line creates a new FileReader object called "fr"
+            let fr = new FileReader();
+            // This line adds an event listener to the "loadend" event of the FileReader object
+            fr.addEventListener('loadend',()=>{
+                // This line declares a variable called "res" and assigns it the result of the FileReader object
+                let res = fr.result;
+                // This line sets the "src" attribute of the "img" element to the value of "res"
+                img.src=res;
+                // This line splits the "res" variable into an array, using the string "base64," as the separator, and assigns the second element to a variable called "spt"
+                let spt = res.split("base64,")[1];
+                // This line creates an object called "obj" with three properties: "base64", "type", and "name"
+                let buktis = {
+                    base64:spt,
+                    type:file.files[0].type,
+                    name:file.files[0].name
+                }
+                // This line sends a POST request to the URL specified in the "url" variable, with the "obj" object as the request body
+                fetch(url,{
+                    method:"POST",
+                    body:JSON.stringify(buktis)
+                })
+                // This line waits for the response from the server and converts it to text
+                .then(r=>r.text())
+                // This line logs the response data to the console
+                .then(data=>console.log(data))
+            })
+            // This line reads the selected file as a data URL
+            fr.readAsDataURL(file.files[0])
+        })
+    </script>
+    
+    <script>
+        document.getElementById('buktis').addEventListener('change', function(event) {
+        var file = event.target.files[0];
+        var reader = new FileReader();
+        reader.onloadend = function() {
+            document.getElementById('buktisEnc').value = reader.result.split(',')[1];
+        }
+            reader.readAsDataURL(file);
+        });
+    </script>
+</body>
+</html>
