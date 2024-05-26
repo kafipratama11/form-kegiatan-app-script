@@ -1,6 +1,6 @@
 .form-card{
-    width: 700px;
-    height: 900px;
+/*     width: 700px;
+    height: 900px; */
     border: 0.1px solid  rgba(227, 151, 201, 0.2);
     border-radius: 12px;
     backdrop-filter: blur(10px);
